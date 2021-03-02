@@ -1,9 +1,34 @@
-import React from 'react'
-import { Container, Row, Col, Progress } from 'reactstrap'
-import { Accordion, Card } from 'react-bootstrap'
-import '../assets/css/content.css'
+import React from "react";
+import { Container, Row, Col, Progress } from "reactstrap";
+import "../assets/css/content.css";
+
+import { makeStyles } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import InboxIcon from "@material-ui/icons/Inbox";
+import DraftsIcon from "@material-ui/icons/Drafts";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 const Contents = () => {
+  const classes = useStyles();
+
   return (
     <Container>
       <Row>
@@ -22,7 +47,7 @@ const Contents = () => {
             <Progress width="80%" value="25" />
           </div>
           <div className="mt-3">
-            <button className="edit__btn" outline>
+            <button className="edit__btn mr-2" outline>
               Editar curso &nbsp;
               <i className="fa fa-edit"></i>
             </button>
@@ -39,28 +64,52 @@ const Contents = () => {
           </div>
         </Col>
         <Col sm="6">
-          <Accordion defaultActiveKey="0">
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
-                Click me!
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>Hello! I'm the body</Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="1">
-                Click me!
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="1">
-                <Card.Body>Hello! I'm another body</Card.Body>
-              </Accordion.Collapse>
-            </Card>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>Introdução</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List component="nav" aria-label="main mailbox folders">
+                <ListItem button>
+                  <ListItemIcon>
+                    <img src="../../assets/svg/play.svg" />
+                  </ListItemIcon>
+                  <ListItemText primary="Inbox" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Drafts" />
+                </ListItem>
+              </List>
+              <Divider />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography className={classes.heading}>Accordion 2</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </Typography>
+            </AccordionDetails>
           </Accordion>
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default Contents
+export default Contents;
